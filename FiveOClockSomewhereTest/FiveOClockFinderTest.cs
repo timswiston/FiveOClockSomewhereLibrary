@@ -13,6 +13,8 @@ namespace FiveOClockSomewhereTest
         public void GetFiveOClockLocationTest()
         {
             FiveOClockFinder fiveO = new();
+            LocationFactoryHardCoded lfhc = new();
+            fiveO.LocationFactory = lfhc;
 
             //pass in 17:00 - expect the same UTC offset to come back
             //e.g. it's 5:00pm in London, then expect London
@@ -48,6 +50,7 @@ namespace FiveOClockSomewhereTest
             //(UTC shoudl be +1 or -23 from where you are at)
 
             LocationFactoryHardCoded lfhc = new();
+            fiveO.LocationFactory = lfhc;
             DateTime d = new(2012, 12, 31, 16, 0, 0, 0); //4pm
 
             IList<Location> locations = lfhc.GetLocations();
@@ -65,9 +68,11 @@ namespace FiveOClockSomewhereTest
         public void AroundTheClockTest()
         {
             FiveOClockFinder fiveO = new();
+            LocationFactoryHardCoded lfhc = new();
+            fiveO.LocationFactory = lfhc;
 
             //loop through the time - each timezone should be -1 from where you are at until you hit -12 then to +12
-            
+
             DateTime d = new(2012, 12, 31, 17, 0, 0, 0); //5pm
 
             Location val;

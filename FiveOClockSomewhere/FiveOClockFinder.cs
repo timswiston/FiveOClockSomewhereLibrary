@@ -7,14 +7,21 @@ namespace FiveOClockSomewhere
     public class FiveOClockFinder
     {
 
-        public IList<Location> Locations { get; }
+        IList<Location> _locations;
+        public IList<Location> Locations 
+        {
+            get { 
+                if (_locations is null)
+                {
+                    _locations = LocationFactory.GetLocations();
+                }
+                return _locations;
+            }
+        }
         public ILocationFactory LocationFactory { get; set; }
 
         public FiveOClockFinder()
         {
-
-            LocationFactory = new LocationFactoryHardCoded();
-            Locations = LocationFactory.GetLocations();
         }
 
 
